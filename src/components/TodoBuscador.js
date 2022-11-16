@@ -1,8 +1,9 @@
 import React from "react";
+import '../styles/TodoBuscador.css'
 
 function TodoBuscador(){
     return(
-        <input placeholder="buscar..."/>
+        <input className="TodoBuscador" placeholder="buscar..."/>
     );
 }
 

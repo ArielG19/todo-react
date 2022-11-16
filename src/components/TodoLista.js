@@ -1,4 +1,5 @@
 import React from "react";
+import '../styles/TodoLista.css';
 
 function TodoLista(props){
     return(
