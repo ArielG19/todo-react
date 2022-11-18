@@ -2,15 +2,28 @@ import React from "react";
 import '../styles/TodoBuscador.css'
 
 function TodoBuscador(){
+
+    //Manejo de estados (posicion 0 el estado actual, 1 -> el estado que nuevo)
+    const [searchValue, setSearchValue] = React.useState('');
+
     //event -> nos indica el valor recibido como parametro
-    const onSearchValue =  (event) => {console.log(event.target.value)}
-    return(
+    const onSearchValue =  (event) => {
+        //console.log(event.target.value)
+        setSearchValue(event.target.value);
+    }
+    // podemos usar [] tambien para envolver varios contendores
+    return[
         //metodo onChange para reacionar a cada cambio en input
+
         <input 
             className="TodoBuscador" 
             placeholder="buscar..."
-            onChange={onSearchValue}/>
-    );
+            value={searchValue}
+            onChange={onSearchValue}
+            key={setSearchValue}/>,
+
+        <p key={searchValue}>{searchValue}</p>
+    ];
 }
 
 export {TodoBuscador};
