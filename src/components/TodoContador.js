@@ -9,7 +9,8 @@ import "../styles/TodoContador.css" //agregando estilos css
     backgroundColor:'Black'
 };*/ 
 
-function TodoContador(){
+//creamos nuestras props
+function TodoContador({completedProps, totalProps}){
     return(
        /* <React.Fragment>
             <h2 style={estilos}>Has completado 2 de 3 TODOS</h2>
@@ -17,7 +18,7 @@ function TodoContador(){
         </React.Fragment>*/
 
           <React.Fragment>
-            <h2 className="TodoContador">Has completado 2 de 3 TODOS</h2>
+            <h2 className="TodoContador">Has completado {completedProps} de {totalProps} TODOS</h2>
             
         </React.Fragment>
     );

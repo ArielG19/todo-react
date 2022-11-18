@@ -1,10 +1,11 @@
 import React from "react";
 import '../styles/TodoBuscador.css'
 
-function TodoBuscador(){
+//1. manejaremos el state desde el componente padre
+function TodoBuscador({searchValue, setSearchValue}){
 
     //Manejo de estados (posicion 0 el estado actual, 1 -> el estado que nuevo)
-    const [searchValue, setSearchValue] = React.useState('');
+    //const [searchValue, setSearchValue] = React.useState('');
 
     //event -> nos indica el valor recibido como parametro
     const onSearchValue =  (event) => {
