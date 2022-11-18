@@ -23,7 +23,7 @@ function TodoBuscador({searchValue, setSearchValue}){
             onChange={onSearchValue}
             key={setSearchValue}/>,
 
-        <p key={searchValue}>{searchValue}</p>
+        <p key={searchValue}></p>
     ];
 }
 
