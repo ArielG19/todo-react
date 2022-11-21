@@ -62,6 +62,41 @@ function App(props) {
   /*----------------Contador de todos-------------------*/
 
 
+   /*----------------Ckeck completed todos -------------------*/
+   const completeTodo = (text) => {
+    //obtenemos la posicion, y comprobamos si el texto es igual al parametro recibido
+    const indexTodo = todos.findIndex(todo => todo.text === text);
+
+    //creamos una copia de todos la cual tendra la actualizacion
+    const newTodos = [...todos];
+
+    //entramos al todo y lo actualizamos
+    newTodos[indexTodo].completed = !newTodos[indexTodo].completed;
+
+    //actualizamos el estado de nuestra app, con la informacion nueva.
+    setTodos(newTodos);
+   }
+    /*----------------Check completed todos -------------------*/
+
+
+    /*----------------Delete todos -------------------*/
+    const deleteTodo = (text) => {
+      //obtenemos la posicion(el todo exacto), y comprobamos si el texto es igual al parametro recibido
+      const indexTodo = todos.findIndex(todo => todo.text === text);
+  
+      //creamos una copia de todos la cual tendra la actualizacion
+      const newTodos = [...todos];
+
+      //eliminamos el todo con el metodo splice
+      newTodos.splice(indexTodo,1);
+  
+      //actualizamos el estado de nuestra app, con la informacion nueva.
+      setTodos(newTodos);
+     }
+
+    /*----------------Delete todos -------------------*/
+
+
 
   return (
     <React.Fragment>
@@ -77,6 +112,8 @@ function App(props) {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            onCompleteProps={() => completeTodo(todo.text)}
+            onDeleteProps={() => deleteTodo(todo.text)}
           />
         ))}
       </TodoLista>
