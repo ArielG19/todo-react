@@ -8,12 +8,12 @@ import { TodoItem } from './components/TodoItem';
 import { CreateTodoButton } from './components/CrearTodoBtn';
 
 /*---------------- todos cargados por defecto-------------------*/
-const defaultTodos = [
+/*const defaultTodos = [
   { text: 'Tarea numero 1', completed: true },
   { text: 'Tomar el cursso de intro a React', completed: false },
   { text: 'Tarea numero 2', completed: true },
   { text: 'Tarea numero 3', completed: true },
-];
+];*/
 
 
 //App es el componente que estamos creando para utilizar luego
@@ -21,10 +21,27 @@ const defaultTodos = [
 
 function App(props) {
 
+  //Guardando info en localStorage
+  const localStorageTodos = localStorage.getItem('TODOS_V1');
+
+  //variable donde estaran los todos creados en localStorage
+  let parsedTodos;
+
+  //validamos si no hay nada en localStorage
+  if(!localStorageTodos){
+    //si no existe entonces creamos uno por defecto, y que sera un array vacio
+    localStorage.setItem('TODOS_V1',JSON.stringify([]));
+    parsedTodos = [];
+  }
+  else{
+    //si hay datos en localStorage, entonces transformamos los datos en un objeto javascript({})
+    parsedTodos = JSON.parse(localStorageTodos);
+  }
   
   /*----------------buscador todos-------------------*/
-  //cargamos estados por defecto
-  const [todos, setTodos] = React.useState(defaultTodos);
+  //cargamos estados por defecto(defaultTodos)
+  //cambiamos a cargar datos desde localStorage
+  const [todos, setTodos] = React.useState(parsedTodos);
 
   //creamos nuestro estado para el componente(hijo) -> todoBuscador.
   const [searchValue, setSearchValue] = React.useState('');
@@ -61,6 +78,20 @@ function App(props) {
     const totalTodos = todos.length;
   /*----------------Contador de todos-------------------*/
 
+  /*----------------Funcion para guardar localStorage datos -------------------*/
+  const saveTodosStorage = (newTodos) => {
+    //Necesitamos convertir nuestra data en un string para guardar en localStorage
+    const stringifiedTodos = JSON.stringify(newTodos);
+
+    //Llamamos a local storage y pasamos nuestro string con los datos de la aplicacion actualizada
+    localStorage.setItem('TODOS_V1', stringifiedTodos);
+
+    //actualizamos el estado de nuestra aplicacion, para que tanto como localStorage la pagina actualize los datos al instante
+    setTodos(newTodos);
+  };
+
+  /*----------------Funcion para guardar localStorage datos -------------------*/
+
 
    /*----------------Ckeck completed todos -------------------*/
    const completeTodo = (text) => {
@@ -74,7 +105,9 @@ function App(props) {
     newTodos[indexTodo].completed = !newTodos[indexTodo].completed;
 
     //actualizamos el estado de nuestra app, con la informacion nueva.
-    setTodos(newTodos);
+    //setTodos(newTodos);
+    //Ahora actualizamos con local storage
+    saveTodosStorage(newTodos);
    }
     /*----------------Check completed todos -------------------*/
 
@@ -91,7 +124,9 @@ function App(props) {
       newTodos.splice(indexTodo,1);
   
       //actualizamos el estado de nuestra app, con la informacion nueva.
-      setTodos(newTodos);
+      //setTodos(newTodos);
+      //Ahora actualizamos con local storage
+      saveTodosStorage(newTodos);
      }
 
     /*----------------Delete todos -------------------*/
