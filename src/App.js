@@ -1,11 +1,7 @@
-//import logo from './logo.svg';
-import './App.css';
 import React from "react";
-import { TodoContador} from "./components/TodoContador";
-import {TodoBuscador} from "./components/TodoBuscador";
-import { TodoLista } from './components/TodoLista';
-import { TodoItem } from './components/TodoItem';
-import { CreateTodoButton } from './components/CrearTodoBtn';
+import { AppUI } from "./components/AppUI";
+
+
 
 /*---------------- todos cargados por defecto-------------------*/
 /*const defaultTodos = [
@@ -37,6 +33,10 @@ function App(props) {
     //si hay datos en localStorage, entonces transformamos los datos en un objeto javascript({})
     parsedTodos = JSON.parse(localStorageTodos);
   }
+
+
+
+
   
   /*----------------buscador todos-------------------*/
   //cargamos estados por defecto(defaultTodos)
@@ -68,6 +68,10 @@ function App(props) {
     searchedTodos = todos;
   }
 
+    /*----------------buscador todos-------------------*/
+
+
+
 
     /*----------------Contador de todos-------------------*/
     //Creamos propiedades para implementar en el componente y pasarle datos de componentes externos
@@ -77,6 +81,9 @@ function App(props) {
     //contando los todos Existentes
     const totalTodos = todos.length;
   /*----------------Contador de todos-------------------*/
+
+
+
 
   /*----------------Funcion para guardar localStorage datos -------------------*/
   const saveTodosStorage = (newTodos) => {
@@ -91,6 +98,9 @@ function App(props) {
   };
 
   /*----------------Funcion para guardar localStorage datos -------------------*/
+
+
+
 
 
    /*----------------Ckeck completed todos -------------------*/
@@ -110,6 +120,10 @@ function App(props) {
     saveTodosStorage(newTodos);
    }
     /*----------------Check completed todos -------------------*/
+
+
+
+
 
 
     /*----------------Delete todos -------------------*/
@@ -133,27 +147,19 @@ function App(props) {
 
 
 
+
+
   return (
-    <React.Fragment>
-      <TodoContador completedProps={completedTodos} totalProps={totalTodos}/>
-      <TodoBuscador
+    //Llamamos a nuestro componente con  la ui de la app
+    <AppUI
+      totalTodosProp={totalTodos}
+      completedTodos={completedTodos}
       searchValue={searchValue}
       setSearchValue={setSearchValue}
-      />
-     
-      <TodoLista>
-        {searchedTodos.map(todo => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onCompleteProps={() => completeTodo(todo.text)}
-            onDeleteProps={() => deleteTodo(todo.text)}
-          />
-        ))}
-      </TodoLista>
-      <CreateTodoButton/>
-    </React.Fragment>
+      searchedTodos={searchedTodos}
+      completeTodo={completeTodo}
+      deleteTodo={deleteTodo}
+    />
   );
 }
 
