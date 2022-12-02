@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/TodoContador.css" //agregando estilos css
+import {TodoContext} from "../componentContext/appContext"
 
 //aplicado css(estilos en linea) con react 
 //crear un objeto con las propiedades a cambiar
@@ -9,8 +10,12 @@ import "../styles/TodoContador.css" //agregando estilos css
     backgroundColor:'Black'
 };*/ 
 
-//creamos nuestras props
-function TodoContador({completedProps, totalProps}){
+
+function TodoContador(){
+
+    //recivimos nuestras props con useContext, que una forma limpia
+  const {completedTodos, totalTodos} = React.useContext(TodoContext);
+
     return(
        /* <React.Fragment>
             <h2 style={estilos}>Has completado 2 de 3 TODOS</h2>
@@ -18,7 +23,7 @@ function TodoContador({completedProps, totalProps}){
         </React.Fragment>*/
 
           <React.Fragment>
-            <h2 className="TodoContador">Has completado {completedProps} de {totalProps} TODOS</h2>
+            <h2 className="TodoContador">Has completado {completedTodos} de {totalTodos} TODOS</h2>
             
         </React.Fragment>
     );

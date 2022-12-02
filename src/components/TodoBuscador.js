@@ -1,8 +1,12 @@
 import React from "react";
 import '../styles/TodoBuscador.css'
+import {TodoContext} from "../componentContext/appContext"
 
 //1. manejaremos el state desde el componente padre
-function TodoBuscador({searchValue, setSearchValue}){
+function TodoBuscador(){
+
+    //recivimos nuestras props con useContext, que una forma limpia
+    const {searchValue, setSearchValue} = React.useContext(TodoContext);
 
     //Manejo de estados (posicion 0 el estado actual, 1 -> el estado que nuevo)
     //const [searchValue, setSearchValue] = React.useState('');

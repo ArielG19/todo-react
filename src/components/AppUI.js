@@ -6,34 +6,36 @@ import {TodoBuscador} from "./TodoBuscador";
 import { TodoLista } from './TodoLista';
 import { TodoItem } from './TodoItem';
 import { CreateTodoButton } from './CrearTodoBtn';
+import {TodoContext} from "../componentContext/appContext"
 
-function AppUI({totalTodos,
-  completedTodos,
-  searchValue,
-  setSearchValue,
-  searchedTodos,
-  completeTodo,
-  deleteTodo,
-}){
+function AppUI(){
+
+  //recivimos nuestras props con useContext, que una forma limpia
+  const {
+    searchedTodos,
+    completeTodo,
+    deleteTodo,
+    } = React.useContext(TodoContext);
+
+
     return (
         <React.Fragment>
-          <TodoContador completedProps={completedTodos} totalProps={totalTodos}/>
-          <TodoBuscador
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-          />
+          <TodoContador/>
+          <TodoBuscador/>
+
+               <TodoLista>
+               {searchedTodos.map(todo => (
+                 <TodoItem
+                   key={todo.text}
+                   text={todo.text}
+                   completedProps={todo.completed}
+                   onCompleteProps={() => completeTodo(todo.text)}
+                   onDeleteProps={() => deleteTodo(todo.text)}
+                 />
+               ))}
+             </TodoLista>
+        
          
-          <TodoLista>
-            {searchedTodos.map(todo => (
-              <TodoItem
-                key={todo.text}
-                text={todo.text}
-                completed={todo.completed}
-                onCompleteProps={() => completeTodo(todo.text)}
-                onDeleteProps={() => deleteTodo(todo.text)}
-              />
-            ))}
-          </TodoLista>
           <CreateTodoButton/>
         </React.Fragment>
       );
