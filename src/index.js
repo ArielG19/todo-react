@@ -24,8 +24,9 @@ reportWebVitals();
 */
 
 ReactDOM.render(
-  //App es componente que se esta renderizando
+  //App es componente que se esta renderizando en nuestro div con id root
   <App />,
   document.getElementById('root')
 
 );
+

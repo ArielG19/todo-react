@@ -15,11 +15,14 @@ function TodoProvider(props){
     //Usamos nuestro custom hook, indicamos cual es nuestro elemento y indicamos que es de tipo array
     const [todos, saveTodosStorage] = useLocalStorage('TODOS_V1',[]);
 
+    /*----------------Modal----------------------------*/
+    //estado para abrir y funcion actualizadora para cerrar el modal
+    // el estado inicial es false para que nuestro modal este cerrado
+    const [openModal, setOpenModal] = React.useState(false);
+
+    /*----------------Modal----------------------------*/
     
     /*----------------buscador todos-------------------*/
-    //cargamos estados por defecto(defaultTodos)
-
-
     //creamos nuestro estado para el componente(hijo) -> todoBuscador.
     const [searchValue, setSearchValue] = React.useState('');
 
@@ -105,6 +108,8 @@ function TodoProvider(props){
             searchedTodos,
             completeTodo,
             deleteTodo,
+            openModal,
+            setOpenModal,
         }}>{props.children}</TodoContext.Provider>
     );
 }
