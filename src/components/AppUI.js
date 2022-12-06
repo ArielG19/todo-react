@@ -8,6 +8,7 @@ import { TodoItem } from './TodoItem';
 import { CreateTodoButton } from './CrearTodoBtn';
 import {TodoContext} from "../componentContext/appContext"
 import { Modal } from "../Modal/modalPortal";
+import {Forms} from "../Forms/form"
 
 function AppUI(){
 
@@ -39,7 +40,7 @@ function AppUI(){
              </TodoLista>
         
           {openModal && (
-            <Modal></Modal>
+            <Modal><Forms></Forms></Modal>
           )}
 
           <CreateTodoButton setOpenModal={setOpenModal} openModal={openModal}/>

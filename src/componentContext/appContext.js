@@ -98,6 +98,24 @@ function TodoProvider(props){
     }
 
     /*----------------Delete todos -------------------*/
+
+       /*----------------add todos -------------------*/
+       //exportaremos esta funcion para crear todos en nuestro componete forms
+       
+       const addTodo = (text) => {
+        //creamos una copia de todos, la cual incluira los nuevos datos
+        const newTodos = [...todos];
+
+        newTodos.push({
+            completed:false,
+            text,
+        });
+
+        //Ahora actualizamos con local storage
+        saveTodosStorage(newTodos);
+    }
+
+    /*----------------Delete todos -------------------*/
     return (
         //en value indicamos las propiedades que queremos compartir
         <TodoContext.Provider value={{   
@@ -110,6 +128,7 @@ function TodoProvider(props){
             deleteTodo,
             openModal,
             setOpenModal,
+            addTodo,
         }}>{props.children}</TodoContext.Provider>
     );
 }
